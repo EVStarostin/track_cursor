@@ -1,11 +1,11 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="Description" content="Author: Evgenii Starostin">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cursor tracking</title>
+    <title>evstar.ru</title>
 
     <style>
         :root {
@@ -103,12 +103,18 @@
     <script>
         const leftEyeApple = document.querySelector('.face__eye--left .face__eye-apple');
         const rightEyeApple = document.querySelector('.face__eye--right .face__eye-apple');
-        const leftEyeCenter = getCenterCoords(leftEyeApple);
-        const rightEyeCenter = getCenterCoords(rightEyeApple);
+        let leftEyeCenter = getCenterCoords(leftEyeApple);
+        let rightEyeCenter = getCenterCoords(rightEyeApple);
 
+        window.addEventListener('resize', handleWindowResize);
         window.addEventListener('mousemove', handleMouseMove);
         window.addEventListener('touchstart', handleTouchStart);
         window.addEventListener('touchmove', handleTouchMove, { passive: false });
+
+        function handleWindowResize(e) {
+            leftEyeCenter = getCenterCoords(leftEyeApple);
+            rightEyeCenter = getCenterCoords(rightEyeApple);
+        }
 
         function handleMouseMove(e) {
             const currentCoords = { x: e.clientX, y: e.clientY };
