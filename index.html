@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cursor tracking</title>
+
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #e9ebee;
+        }
+
+        .face {
+            position: relative;
+            width: 50%;
+            padding-bottom: 50%;
+            margin: 0 auto;
+            border-radius: 50%;
+            background-color: blanchedalmond;
+        }
+
+        .face__mouth {
+            position: absolute;
+            width: 50%;
+            height: 10%;
+            margin: 0 auto;
+            background-color: brown;
+            left: 0;
+            right: 0;
+            bottom: 20%;
+            border-radius: 10% / 50%;
+        }
+
+        .face__eye {
+            position: absolute;
+            width: 20%;
+            height: 20%;
+            background-color: white;
+            border-radius: 50%;
+            top: 20%;
+            padding: 5%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .face__eye--left {
+            left: 15%;
+        }
+
+        .face__eye--right {
+            right: 15%;
+        }
+
+        .face__eye-apple {
+            width: 50%;
+            height: 50%;
+            border-radius: 50%;
+            background-color: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="face">
+        <div class="face__eye face__eye--left">
+            <div class="face__eye-apple"></div>
+        </div>
+        <div class="face__eye face__eye--right">
+            <div class="face__eye-apple"></div>
+        </div>
+        <div class="face__mouth"></div>
+    </div>
+
+    <script>
+        const leftEye = document.querySelector('.face__eye--left .face__eye-apple');
+        const rightEye = document.querySelector('.face__eye--right .face__eye-apple');
+
+        window.onmousemove = function(e) {
+            const coord = { x: 442, y: 494 };
+            const diff = { x: coord.x - e.clientX, y: coord.y - e.clientY };
+
+            const angleRad = Math.atan2(diff.y, diff.x);
+            const angleDeg = angleRad * 180 / Math.PI;
+
+            leftEye.style.transform = `rotate(${angleDeg}deg) translateX(-30%)`;
+
+            const coord2 = { x: 659, y: 494 };
+            const diff2 = { x: coord2.x - e.clientX, y: coord2.y - e.clientY };
+
+            const angleRad2 = Math.atan2(diff2.y, diff2.x);
+            const angleDeg2 = angleRad2 * 180 / Math.PI;
+
+            rightEye.style.transform = `rotate(${angleDeg2}deg) translateX(-30%)`;
+        }
+    </script>
+</body>
+</html>
